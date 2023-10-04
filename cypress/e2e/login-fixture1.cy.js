@@ -1,6 +1,16 @@
 describe("template spec", () => {
-  beforeAll("passes", () => {
+  before(async () => {
+    await cy.fixture("login.json").as("loginData");
     cy.visit("http://localhost:4200/public/login");
+  });
+
+  beforeEach(() => {});
+
+  it("user data to login", () => {
+    cy.get("#mat-input-0").type(loginData.email);
+    cy.get("#mat-input-1").type(loginData.password);
+
+    cy.get(".mat-button-wrapper").click();
   });
 });
 
